@@ -15,9 +15,9 @@ class Maze:
 
     def item_delivery(self):
         self.grid[self.test_case.yu, self.test_case.xu] = 1
-        inter_path, inter_cost = self.aStar(self.test_case.xb, self.test_case.yb, self.test_case.xi, self.test_case.yi, self.grid, "", -1, True)
+        inter_path, inter_cost = self.aStar(self.test_case.xb, self.test_case.yb, self.test_case.xi, self.test_case.yi, self.grid, "", -1, False)
         self.grid[self.test_case.yu, self.test_case.xu] = 0
-        path, cost = self.aStar(self.test_case.xi, self.test_case.yi, self.test_case.xu, self.test_case.yu, self.grid, inter_path, inter_cost-1, True)
+        path, cost = self.aStar(self.test_case.xi, self.test_case.yi, self.test_case.xu, self.test_case.yu, self.grid, inter_path[:-7], inter_cost-1, True)
         return
     
     def input_parse(self, test_case_num):
@@ -96,7 +96,7 @@ class Maze:
             # if the current coordinates are that of the end points, we have found the destination and can print the results
             if (curr.x == ex and curr.y == ey):
                 if printResult:
-                    print("Complete path: ", curr.path)
+                    print("Complete path: ", curr.path[1:])
                     print("Cost: ", curr.cost)
                 return curr.path, curr.cost
             
